@@ -1,6 +1,15 @@
 #include <vector>
-using std::vector;
+#include <string>
+#include <map>
+#include <iostream>
+#include <cctype>
 
+using namespace std;
+
+//spend too much time
+//O(n^2)
+//use map, exchange room with time
+/*
 class Solution {
 public:
 	vector<int> twoSum(vector<int> &numbers, int target) {
@@ -17,3 +26,37 @@ public:
     }
 
 };
+*/
+
+class Solution {
+public:
+	vector<int> twoSum(vector<int> &numbers, int target) {
+		map<int, int> m;
+		for (decltype(numbers.size()) i = 0; i < numbers.size(); ++i) {
+			if (m.find(target - numbers[i]) == m.end())
+				m[numbers[i]] = i;
+			else
+				return vector<int> {m[target - numbers[i]], i};
+		}
+	}
+};
+
+
+vector<int> twoSum(vector<int> &numbers, int target) {
+	map<int, int> m;
+	for (decltype(numbers.size()) i = 0; i < numbers.size(); ++i) {
+		if (m.find(target - numbers[i]) == m.end())
+			m[numbers[i]] = i;
+		else
+			return vector<int> {m[target - numbers[i]], i};
+	}
+}
+
+int main()
+{
+	vector<int> numbers{3, 2, 4};
+	vector<int> result = twoSum(numbers, 6);
+	cout << result[0] << "\t" << result[1] << endl;
+
+	return 0;
+}
